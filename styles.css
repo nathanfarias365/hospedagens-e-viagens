@@ -1,0 +1,1845 @@
+/* =========================================================
+   1. Variáveis e regras globais
+   ========================================================= */
+:root {
+  --navy: #082f6b;
+  --blue: #0754b8;
+  --gold: #ffc247;
+  --ink: #142b48;
+  --muted: #586b81;
+  --line: #dce5ed;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  width: 100%;
+  font-family: Poppins, sans-serif;
+  color: var(--ink);
+}
+.shell {
+  width: min(1180px, calc(100% - 36px));
+  margin-inline: auto;
+}
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+[hidden] {
+  display: none !important;
+}
+.view:not([hidden]) {
+  animation: appear 0.32s ease both;
+}
+
+/* Animação aplicada quando uma seção da página é exibida. */
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   2. Estrutura e elementos reutilizáveis
+   ========================================================= */
+.hero {
+  position: relative;
+  min-height: 440px;
+  background: #173e69;
+  overflow: hidden;
+}
+.hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero:after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #041b3dde, #041b3d88 65%, #041b3d44);
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 86px 0 110px;
+}
+.page-top {
+  background: linear-gradient(120deg, #e9f3fc, #f7f9fc);
+  border-bottom: 1px solid var(--line);
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 5px 23px #173b5c0b;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+.field label {
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #445a71;
+}
+.field input,
+.field select {
+  width: 100%;
+  height: 46px;
+  border: 1px solid #bfcfdd;
+  border-radius: 10px;
+  background: #fff;
+  padding: 0 12px;
+  color: var(--ink);
+  font: inherit;
+}
+.field input:focus,
+.field select:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 1px;
+}
+.action {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-weight: 800;
+  transition:
+    background 0.2s,
+    transform 0.2s;
+}
+.action:hover {
+  background: #003d92;
+  transform: translateY(-2px);
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+.pill {
+  display: inline-block;
+  border-radius: 100px;
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.nav-link[aria-current="page"] {
+  box-shadow: inset 0 -3px var(--gold);
+}
+.filter[aria-pressed="true"] {
+  background: var(--blue) !important;
+  color: #fff !important;
+  border-color: var(--blue);
+}
+#map {
+  height: 430px;
+  width: 100%;
+  border-radius: 16px;
+  z-index: 0;
+}
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #091d39b8;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+.modal-box {
+  width: min(100%, 520px);
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 25px 80px #0005;
+}
+
+/* =========================================================
+   3. Responsividade e acessibilidade de movimento
+   ========================================================= */
+@media (max-width: 700px) {
+  .hero {
+    min-height: 390px;
+  }
+  .hero-content {
+    padding: 65px 0 90px;
+  }
+  #map {
+    height: 330px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* =========================================================
+   5. Direção visual FlowReservas
+   ========================================================= */
+  :root {
+    --navy: #0a2a5a;
+    --blue: #1474bd;
+    --teal: #17baa0;
+    --gold: #ffad32;
+    --ink: #112746;
+  }
+
+  body {
+    background: #f7f9fc;
+  }
+  .shell {
+    width: min(1180px, calc(100% - 48px));
+  }
+  [data-template-id="site-header"] {
+    position: absolute;
+    z-index: 20;
+    background: linear-gradient(180deg, rgba(4, 24, 53, 0.82), rgba(4, 24, 53, 0.42));
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+  }
+  [data-template-id="brand-name"] {
+    font-size: 22px;
+    letter-spacing: -0.03em;
+  }
+  [data-template-id="nav-account"] {
+    border: 0 !important;
+    border-radius: 999px !important;
+    padding: 11px 18px !important;
+    background: #159fbc;
+    font-weight: 800 !important;
+  }
+  .hero {
+    min-height: 620px;
+    background: #0c2a50;
+  }
+  .hero img {
+    object-position: center 58%;
+  }
+  .hero:after {
+    background:
+      linear-gradient(90deg, rgba(5, 29, 63, 0.82), rgba(5, 29, 63, 0.28) 72%, rgba(5, 29, 63, 0.18)),
+      linear-gradient(180deg, rgba(5, 29, 63, 0.18), rgba(5, 29, 63, 0.12));
+  }
+  .hero-content {
+    min-height: 620px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 118px 0 150px;
+  }
+  [data-template-id="home-kicker"] {
+    border: 1px solid rgba(255, 255, 255, 0.38);
+    background: rgba(255, 255, 255, 0.16) !important;
+    color: #fff !important;
+    font-size: 13px;
+    letter-spacing: 0;
+    backdrop-filter: blur(8px);
+  }
+  [data-template-id="home-title"] {
+    max-width: 820px !important;
+    margin-inline: auto;
+    font-size: clamp(48px, 6vw, 72px);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+    text-shadow: 0 3px 24px rgba(5, 29, 63, 0.28);
+  }
+  [data-template-id="home-intro"] {
+    max-width: 720px !important;
+    margin-inline: auto;
+    font-size: 18px;
+    line-height: 1.6;
+    text-shadow: 0 2px 12px rgba(5, 29, 63, 0.35);
+  }
+  [data-template-id="home-panel"],
+  [data-template-id="home-disclaimer"] {
+    display: none;
+  }
+  #hospedagens > .shell.relative.-mt-14 {
+    display: none;
+  }
+  #hospedagens > .shell.pb-16 {
+    padding-top: 28px;
+    margin-top: -92px;
+    position: relative;
+    z-index: 10;
+  }
+  [data-template-id="stays-kicker"],
+  [data-template-id="stays-title"],
+  [data-template-id="stays-intro"] {
+    display: none;
+  }
+  [data-template-id="stay-form-title"] {
+    display: none;
+  }
+  #stay-form {
+    margin: 0;
+    padding: 16px 20px;
+    border: 0;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 18px 50px rgba(12, 42, 90, 0.18);
+    grid-template-columns: repeat(3, minmax(150px, 1fr)) repeat(2, minmax(120px, 0.65fr));
+    align-items: end;
+  }
+  #stay-form .field {
+    border-right: 1px solid #dfe8ef;
+    padding-right: 12px;
+  }
+  #stay-form .field:nth-child(3),
+  #stay-form .field:nth-child(5) {
+    border-right: 0;
+  }
+  #stay-form .field input,
+  #stay-form .field select {
+    height: 38px;
+    border: 0;
+    border-radius: 6px;
+    padding: 0 4px;
+    font-size: 14px;
+  }
+  #stay-form .field label {
+    color: #8a9aaa;
+    font-size: 10px;
+  }
+  #stay-form .flex.items-end {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+  #stay-search {
+    border-radius: 12px;
+    min-height: 48px;
+    background: linear-gradient(135deg, #159fbc, #08739c) !important;
+    box-shadow: 0 10px 24px rgba(21, 159, 188, 0.24);
+  }
+  [data-template-id="stay-list-title"] {
+    margin-top: 70px;
+    font-size: 34px;
+    letter-spacing: -0.04em;
+  }
+  [data-template-id="stay-list-title"]:before {
+    content: "CURADORIA EXCLUSIVA";
+    display: block;
+    margin-bottom: 8px;
+    color: #169d86;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+  }
+  .stay-card {
+    border: 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 34px rgba(23, 59, 92, 0.09);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .stay-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 42px rgba(23, 59, 92, 0.16);
+  }
+  .stay-card > img {
+    height: 220px;
+  }
+  [data-template-id$="-button"] {
+    border-radius: 10px;
+    background: #0d75b5 !important;
+  }
+  [data-template-id$="-type"] {
+    background: #edf5fa;
+    color: #21566d;
+  }
+  [data-template-id="site-footer"] {
+    margin-top: 40px;
+    background: #09284f;
+  }
+  .card,
+  .field input,
+  .field select {
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .modal-box {
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 30px 100px rgba(2, 18, 42, 0.38);
+  }
+
+  @media (max-width: 900px) {
+    #stay-form {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    #stay-form .field {
+      border-right: 0;
+    }
+    #stay-form .flex.items-end {
+      grid-column: 1 / -1;
+    }
+    [data-template-id="nav-flights"],
+    [data-template-id="nav-attractions"] {
+      display: none;
+    }
+    .hero,
+    .hero-content {
+      min-height: 560px;
+    }
+  }
+  @media (max-width: 700px) {
+    .shell {
+      width: min(100% - 28px, 1180px);
+    }
+    [data-template-id="site-header"] .shell {
+      min-height: 66px;
+    }
+    [data-template-id="nav-home"],
+    [data-template-id="nav-stays"] {
+      display: none;
+    }
+    [data-template-id="nav-account"] {
+      padding: 9px 12px !important;
+      font-size: 13px !important;
+    }
+    .hero,
+    .hero-content {
+      min-height: 530px;
+    }
+    .hero-content {
+      padding: 100px 0 145px;
+    }
+    [data-template-id="home-title"] {
+      font-size: 42px;
+    }
+    [data-template-id="home-intro"] {
+      font-size: 15px;
+    }
+    #hospedagens > .shell.pb-16 {
+      margin-top: -104px;
+    }
+    #stay-form {
+      grid-template-columns: 1fr;
+    }
+    #stay-form .field {
+      padding: 4px 0;
+    }
+    [data-template-id="stay-list-title"] {
+      margin-top: 50px;
+    }
+  }
+
+  /* Descoberta de destinos no início da página. */
+  .discovery-section {
+    margin-top: 64px;
+    padding: 42px 0 12px;
+    border-top: 1px solid #e1e8ef;
+  }
+  .discovery-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .discovery-heading > p {
+    max-width: 390px;
+    color: #667b91;
+    line-height: 1.65;
+  }
+  .discovery-kicker {
+    margin: 0 0 8px;
+    color: #169d86;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .discovery-heading h2 {
+    margin: 0;
+    color: #112746;
+    font-size: 34px;
+    line-height: 1.12;
+    letter-spacing: -0.04em;
+  }
+  .discovery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 26px 0 20px;
+  }
+  .discovery-filter {
+    min-height: 42px;
+    border: 1px solid #dbe5ed;
+    border-radius: 999px;
+    background: #fff;
+    color: #52677d;
+    padding: 9px 16px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+  .discovery-filter:hover,
+  .discovery-filter.active {
+    border-color: #0e698c;
+    background: #0e698c;
+    color: #fff;
+    transform: translateY(-1px);
+  }
+  .discovery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-rows: 300px;
+    gap: 16px;
+  }
+  .discovery-card {
+    position: relative;
+    min-height: 300px;
+    overflow: hidden;
+    border-radius: 18px;
+    background: #173f69;
+    box-shadow: 0 12px 34px rgba(18, 55, 88, 0.12);
+  }
+  .discovery-card-tall {
+    grid-row: span 1;
+  }
+  .discovery-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .discovery-card:hover img {
+    transform: scale(1.055);
+  }
+  .discovery-card:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 27, 58, 0.04) 25%, rgba(5, 27, 58, 0.88) 100%);
+  }
+  .discovery-card-overlay {
+    position: absolute;
+    z-index: 2;
+    left: 20px;
+    right: 20px;
+    bottom: 18px;
+    color: #fff;
+  }
+  .discovery-card-overlay span {
+    display: inline-block;
+    margin-bottom: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.42);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    padding: 5px 10px;
+    font-size: 11px;
+    font-weight: 800;
+    backdrop-filter: blur(8px);
+  }
+  .discovery-card-overlay h3 {
+    margin: 0;
+    font-size: 25px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+  .discovery-card-overlay p {
+    margin: 7px 0 10px;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 13px;
+  }
+  .discovery-card-overlay button {
+    border: 0;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+  }
+  .discovery-card-overlay button:after {
+    content: " →";
+  }
+  @media (max-width: 900px) {
+    .discovery-heading {
+      align-items: start;
+    }
+    .discovery-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 700px) {
+    .discovery-section {
+      margin-top: 42px;
+    }
+    .discovery-heading {
+      display: block;
+    }
+    .discovery-heading h2 {
+      font-size: 28px;
+    }
+    .discovery-heading > p {
+      margin-top: 12px;
+    }
+    .discovery-grid {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 280px;
+    }
+  }
+@media (prefers-reduced-motion: reduce) {
+  .view:not([hidden]) {
+    animation: none;
+  }
+  .action {
+    transition: none;
+  }
+}
+
+/* =========================================================
+   4. Identidade visual dos elementos do conteúdo
+   Estes estilos substituem os antigos estilos inline.
+   ========================================================= */
+[data-template-id="__page-root"] {
+  background: rgb(255, 255, 255);
+}
+
+/* Identidade visual do cabeçalho e dos links de navegação. */
+[data-template-id="site-header"] {
+  background: rgb(8, 47, 107);
+}
+[data-template-id="brand-name"] {
+  color: rgb(255, 255, 255);
+  font-weight: 800;
+  font-style: normal;
+  font-size: 21px;
+}
+[data-template-id="nav-home"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="nav-flights"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="nav-stays"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="nav-attractions"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="nav-account"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Identidade visual da apresentação inicial e dos cartões de entrada. */
+[data-template-id="home-kicker"] {
+  background: rgb(255, 194, 71);
+  color: rgb(8, 47, 107);
+  font-weight: 800;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-title"] {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 52px;
+}
+[data-template-id="home-intro"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 18px;
+}
+[data-template-id="home-panel"] {
+  background: rgb(255, 255, 255);
+}
+[data-template-id="home-eyebrow"] {
+  color: rgb(8, 122, 134);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-sections-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="home-flights-card"] {
+  background: rgb(237, 245, 255);
+}
+[data-template-id="home-flights-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="home-flights-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-flights-cta"] {
+  color: rgb(7, 84, 184);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-stays-card"] {
+  background: rgb(234, 247, 242);
+}
+[data-template-id="home-stays-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="home-stays-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-stays-cta"] {
+  color: rgb(22, 100, 92);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-attractions-card"] {
+  background: rgb(255, 245, 221);
+}
+[data-template-id="home-attractions-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="home-attractions-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-attractions-cta"] {
+  color: rgb(121, 83, 20);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="home-disclaimer"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Tipografia e cores da busca e do catálogo de hospedagens. */
+[data-template-id="stays-kicker"] {
+  color: rgb(8, 122, 134);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stays-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="stays-intro"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-form-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="stay-country-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-city-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-date-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-days-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-people-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-type-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-search"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 800;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-list-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="stay-list-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-rio-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-rio-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-rio-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-rio-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-rio-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-lisbon-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-lisbon-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-lisbon-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-lisbon-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-lisbon-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-orlando-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-orlando-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-orlando-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-orlando-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-orlando-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-fortaleza-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-fortaleza-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-fortaleza-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-fortaleza-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-fortaleza-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-sao-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-sao-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-sao-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-sao-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-sao-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-belem-type"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-belem-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="hotel-belem-rating"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-belem-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="hotel-belem-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="stay-empty"] {
+  color: rgb(37, 73, 105);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Tipografia e cores da área de voos e das rotas sugeridas. */
+[data-template-id="flights-back"] {
+  color: rgb(7, 84, 184);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flights-kicker"] {
+  color: rgb(8, 122, 134);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flights-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+}
+[data-template-id="flights-intro"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-form-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="flight-country-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-city-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-date-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-cabin-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-trip-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-people-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-search"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 800;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="flight-empty"] {
+  color: rgb(37, 73, 105);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="popular-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="popular-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-rio"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-rio-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-sao"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-sao-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-fortaleza"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="route-fortaleza-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="map-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="map-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attractions-back"] {
+  color: rgb(7, 84, 184);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Tipografia e cores da busca e dos cartões de atrações. */
+[data-template-id="attractions-kicker"] {
+  color: rgb(8, 122, 134);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attractions-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 32px;
+}
+[data-template-id="attractions-intro"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attraction-search-label"] {
+  color: rgb(68, 90, 113);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attraction-search"] {
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="filter-all"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="filter-squares"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="filter-monuments"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="filter-restaurants"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="filter-events"] {
+  color: rgb(20, 43, 72);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attractions-list-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="square-category"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="square-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="square-city"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="square-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="square-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="monument-category"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="monument-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="monument-city"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="monument-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="monument-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="restaurant-category"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="restaurant-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="restaurant-city"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="restaurant-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="restaurant-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="event-category"] {
+  background: rgb(234, 244, 250);
+  color: rgb(20, 86, 120);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="event-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 19px;
+}
+[data-template-id="event-city"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="event-desc"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="event-button"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attraction-empty"] {
+  color: rgb(37, 73, 105);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="attraction-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Identidade visual do rodapé e dos diálogos modais. */
+[data-template-id="site-footer"] {
+  background: rgb(8, 47, 107);
+}
+[data-template-id="footer-brand"] {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 20px;
+}
+[data-template-id="footer-note"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="footer-home"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="footer-flights"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="footer-stays"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="footer-attractions"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="footer-account"] {
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="account-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="account-message"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="account-close"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="availability-title"] {
+  color: rgb(20, 43, 72);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 24px;
+}
+[data-template-id="availability-message"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="availability-close"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="detail-note"] {
+  color: rgb(88, 107, 129);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+[data-template-id="detail-close"] {
+  background: rgb(7, 84, 184);
+  color: rgb(255, 255, 255);
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+}
+
+/* Acabamento visual atualizado para a experiência de reserva. */
+:root {
+  --navy: #102a43;
+  --blue: #176b5b;
+  --gold: #f2b84b;
+  --ink: #193344;
+  --muted: #647987;
+  --line: #e2e9e5;
+}
+body {
+  background: #f7f9f7;
+  color: var(--ink);
+  font-family: "Poppins", "Segoe UI", sans-serif;
+}
+[data-template-id="site-header"] {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: #102a43;
+  box-shadow: 0 8px 26px #102a4322;
+}
+[data-template-id="site-header"] > .shell {
+  min-height: 78px;
+}
+.hero {
+  min-height: 540px;
+  background: #244e56;
+}
+.hero:after {
+  background: linear-gradient(90deg, #102a43ed, #102a4388 55%, #102a4320);
+}
+.hero-content {
+  padding-top: 118px;
+  padding-bottom: 140px;
+}
+[data-template-id="home-title"] {
+  max-width: 700px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(42px, 6vw, 68px);
+  line-height: 1.08;
+}
+[data-template-id="home-kicker"] {
+  background: #f2b84b;
+  color: #102a43;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+.card {
+  border-color: #e5ebe8;
+  border-radius: 20px;
+  box-shadow: 0 12px 34px #102a430c;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+.stay-card:hover,
+.attraction-card:hover {
+  box-shadow: 0 18px 42px #102a4317;
+  transform: translateY(-4px);
+}
+.stay-card > img,
+.attraction-card > img {
+  height: 220px;
+  object-fit: cover;
+}
+.stay-card .action,
+.attraction-card .action {
+  background: var(--blue);
+  border-radius: 12px;
+}
+.field input,
+.field select {
+  min-height: 50px;
+  border-color: #d3ded8;
+  border-radius: 12px;
+  background-color: #fcfdfc;
+}
+.field input:focus,
+.field select:focus {
+  outline-color: #176b5b;
+}
+.action {
+  min-height: 48px;
+  background: #176b5b;
+  border-radius: 12px;
+}
+.action:hover {
+  background: #0f5749;
+}
+[data-template-id="home-panel"] {
+  border-radius: 24px;
+  box-shadow: 0 24px 70px #102a431a;
+}
+[data-template-id$="-card"] {
+  border: 1px solid #e4ece8;
+  border-radius: 18px;
+}
+.page-top {
+  background: linear-gradient(120deg, #edf5f0, #f8faf8);
+}
+.eyebrow,
+.pill {
+  color: #176b5b;
+}
+.pill {
+  background: #eaf4ef;
+}
+.nav-link[aria-current="page"] {
+  box-shadow: inset 0 -3px #f2b84b;
+}
+.modal {
+  overflow-y: auto;
+  background: #102a43b8;
+  backdrop-filter: blur(5px);
+}
+.modal-box {
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  border-radius: 24px;
+  padding: clamp(22px, 5vw, 34px);
+}
+#stay-form {
+  border-radius: 22px;
+  box-shadow: 0 16px 45px #102a4310;
+}
+.booking-meta {
+  color: #176b5b;
+  font-size: 14px;
+}
+#booking-feedback {
+  color: #176b5b;
+}
+[data-template-id="site-footer"] {
+  background: #102a43;
+}
+@media (max-width: 700px) {
+  .hero {
+    min-height: 430px;
+  }
+  .hero-content {
+    padding-top: 82px;
+    padding-bottom: 112px;
+  }
+  .stay-card > img,
+  .attraction-card > img {
+    height: 200px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card {
+    transition: none;
+  }
+}
+
+/* Overrides finais da identidade FlowReservas. */
+[data-template-id="site-header"] {
+  position: absolute;
+  z-index: 30;
+  background: linear-gradient(180deg, rgba(4, 24, 53, 0.86), rgba(4, 24, 53, 0.48));
+  backdrop-filter: blur(10px);
+}
+[data-template-id="brand-name"] {
+  font-size: 22px;
+  letter-spacing: -0.03em;
+}
+[data-template-id="nav-account"] {
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: #159fbc !important;
+  padding: 11px 18px !important;
+  font-weight: 800 !important;
+}
+.hero {
+  min-height: 620px;
+  background: #0c2a50;
+}
+.hero:after {
+  background:
+    linear-gradient(90deg, rgba(5, 29, 63, 0.82), rgba(5, 29, 63, 0.28) 72%, rgba(5, 29, 63, 0.18)),
+    linear-gradient(180deg, rgba(5, 29, 63, 0.12), rgba(5, 29, 63, 0.18));
+}
+.hero-content {
+  min-height: 620px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 118px 0 150px;
+}
+[data-template-id="home-kicker"] {
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.16) !important;
+  color: #fff !important;
+  backdrop-filter: blur(8px);
+}
+[data-template-id="home-title"] {
+  max-width: 820px !important;
+  margin-inline: auto;
+  font-size: clamp(48px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  text-shadow: 0 3px 24px rgba(5, 29, 63, 0.28);
+}
+[data-template-id="home-intro"] {
+  max-width: 720px !important;
+  margin-inline: auto;
+  font-size: 18px;
+  line-height: 1.6;
+}
+[data-template-id="home-panel"],
+[data-template-id="home-disclaimer"] {
+  display: none;
+}
+#hospedagens > .shell.relative.-mt-14 {
+  display: none;
+}
+#hospedagens > .shell.pb-16 {
+  position: relative;
+  z-index: 10;
+  margin-top: -92px;
+  padding-top: 28px;
+}
+[data-template-id="stays-kicker"],
+[data-template-id="stays-title"],
+[data-template-id="stays-intro"],
+[data-template-id="stay-form-title"] {
+  display: none;
+}
+#stay-form {
+  margin: 0;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  align-items: end;
+  border: 0;
+  border-radius: 18px;
+  padding: 16px 20px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(12, 42, 90, 0.18);
+}
+#stay-form .field {
+  padding-right: 12px;
+  border-right: 1px solid #dfe8ef;
+}
+#stay-form .field:nth-child(4),
+#stay-form .field:nth-child(6) {
+  border-right: 0;
+}
+#stay-form .field input,
+#stay-form .field select {
+  height: 38px;
+  border: 0;
+  border-radius: 6px;
+  padding: 0 4px;
+  font-size: 14px;
+}
+#stay-form .field label {
+  color: #8a9aaa;
+  font-size: 10px;
+}
+#stay-form .flex.items-end {
+  grid-column: 1 / -1;
+  margin-top: 4px;
+}
+#stay-search {
+  min-height: 48px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #159fbc, #08739c) !important;
+  box-shadow: 0 10px 24px rgba(21, 159, 188, 0.24);
+}
+[data-template-id="stay-list-title"] {
+  margin-top: 70px;
+  font-size: 34px;
+  letter-spacing: -0.04em;
+}
+[data-template-id="stay-list-title"]:before {
+  content: "CURADORIA EXCLUSIVA";
+  display: block;
+  margin-bottom: 8px;
+  color: #169d86;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+.stay-card {
+  border: 0;
+  border-radius: 20px;
+  box-shadow: 0 10px 34px rgba(23, 59, 92, 0.09);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.stay-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 42px rgba(23, 59, 92, 0.16);
+}
+.stay-card > img {
+  height: 220px;
+}
+[data-template-id="site-footer"] {
+  background: #09284f;
+}
+@media (max-width: 900px) {
+  #stay-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  #stay-form .field {
+    border-right: 0;
+  }
+  [data-template-id="nav-flights"],
+  [data-template-id="nav-attractions"] {
+    display: none;
+  }
+  .hero,
+  .hero-content {
+    min-height: 560px;
+  }
+}
+@media (max-width: 700px) {
+  [data-template-id="nav-home"],
+  [data-template-id="nav-stays"] {
+    display: none;
+  }
+  [data-template-id="nav-account"] {
+    padding: 9px 12px !important;
+    font-size: 13px !important;
+  }
+  .hero,
+  .hero-content {
+    min-height: 530px;
+  }
+  .hero-content {
+    padding: 100px 0 145px;
+  }
+  [data-template-id="home-title"] {
+    font-size: 42px;
+  }
+  [data-template-id="home-intro"] {
+    font-size: 15px;
+  }
+  #hospedagens > .shell.pb-16 {
+    margin-top: -104px;
+  }
+  #stay-form {
+    grid-template-columns: 1fr;
+  }
+  #stay-form .field {
+    padding: 4px 0;
+  }
+  [data-template-id="stay-list-title"] {
+    margin-top: 50px;
+  }
+}
